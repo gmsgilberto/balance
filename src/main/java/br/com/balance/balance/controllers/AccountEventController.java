@@ -10,16 +10,18 @@ import br.com.balance.balance.controllers.dtos.DeposityEventResponse;
 import br.com.balance.balance.controllers.dtos.TransferEventResponse;
 import br.com.balance.balance.controllers.dtos.WithdrawEventResponse;
 import br.com.balance.balance.domain.EventType;
-import br.com.balance.balance.infra.repository.AccountRepository;
-import br.com.balance.balance.services.AccountService;
+import br.com.balance.balance.services.DeposityService;
+import br.com.balance.balance.services.TransferService;
+import br.com.balance.balance.services.WithdrawService;
 import lombok.AllArgsConstructor;
 
 @RestController
 @AllArgsConstructor
 public class AccountEventController {
 	
-	private AccountService accountService;
-	private AccountRepository repository;
+	private TransferService transferService;
+	private DeposityService deposityService;
+	private WithdrawService withdrawService;
 	
 	@PostMapping("/event")
 	public ResponseEntity<String> event(@RequestBody AccountEventRequest request){
@@ -39,12 +41,12 @@ public class AccountEventController {
 	}
 
 	private ResponseEntity<String> deposity(AccountEventRequest request) {
-		var account = this.accountService.deposit(request.getDestination(), request.getAmount());
+		var account = this.deposityService.deposit(request.getDestination(), request.getAmount());
 		return ResponseEntity.status(201).body(new DeposityEventResponse(account).toJson());
 	}
 	
 	private ResponseEntity<String> withdraw(AccountEventRequest request) {
-		var account = this.accountService.withdraw(request.getOrigin(), request.getAmount());
+		var account = this.withdrawService.withdraw(request.getOrigin(), request.getAmount());
 		if(account == null) {
 			return ResponseEntity.status(404).body("0");
 		}
@@ -53,12 +55,12 @@ public class AccountEventController {
 	
 	
 	private ResponseEntity<String> transfer(AccountEventRequest request) {
-		var from = this.accountService.transfer(request.getOrigin(), request.getDestination(), request.getAmount());
-		if(from == null) {
+		var transfer = this.transferService.transfer(request.getOrigin(), request.getDestination(), request.getAmount());
+		if(transfer == null) {
 			return ResponseEntity.status(404).body("0");
 		}
-		var to = this.repository.findByAccountId(request.getDestination());
-		return ResponseEntity.status(201).body(new TransferEventResponse(from,to).toJson());
+		
+		return ResponseEntity.status(201).body(new TransferEventResponse(transfer).toJson());
 	}
 	
 	

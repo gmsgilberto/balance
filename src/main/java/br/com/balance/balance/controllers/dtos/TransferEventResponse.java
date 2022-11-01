@@ -1,6 +1,6 @@
 package br.com.balance.balance.controllers.dtos;
 
-import br.com.balance.balance.domain.Account;
+import br.com.balance.balance.domain.dtos.TransferResult;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,9 +17,9 @@ public class TransferEventResponse extends AccountEventResponse{
 
 	private AccountResponse destination;
 	private AccountResponse origin;
-	public TransferEventResponse(Account from, Account to) {
-		this.origin = new AccountResponse(from);
-		this.destination = new AccountResponse(to);
+	public TransferEventResponse(TransferResult transferResult) {
+		this.origin = new AccountResponse(transferResult.getFrom());
+		this.destination = new AccountResponse(transferResult.getTo());
 	}
 	
 	@Override
