@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.balance.balance.controllers.dtos.AccountEventRequest;
 import br.com.balance.balance.controllers.dtos.AccountEventResponse;
-import br.com.balance.balance.domain.EventType;
+import br.com.balance.balance.domain.AccountEventType;
 import br.com.balance.balance.exceptions.AccountNotfoundException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -42,7 +42,7 @@ public class AccountEventHub {
 		
 		ResponseEntity<? extends AccountEventResponse> response = null;
 		
-		switch (EventType.get(request.getType())) {
+		switch (AccountEventType.get(request.getType())) {
 			case DEPOSITY:
 				response = deposityController.deposity(request.getDestination(), request.getAmount());
 				break;

@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NonNull;
 
 @Getter
-public enum EventType {
+public enum AccountEventType {
 
 	DEPOSITY("deposit"),
 	WITHDRAW("withdraw"),
@@ -13,12 +13,12 @@ public enum EventType {
 	
 	private final String code;
 	
-	EventType(@NonNull String code){
+	AccountEventType(@NonNull String code){
 		this.code = code;
 	}
 	
-	public static final EventType get(String code) {
-		for(EventType eventType: values()) {
+	public static final AccountEventType get(String code) {
+		for(AccountEventType eventType: values()) {
 			if(eventType.code.equalsIgnoreCase(code)) {
 				return eventType;
 			}

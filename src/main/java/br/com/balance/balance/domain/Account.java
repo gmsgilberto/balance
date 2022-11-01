@@ -18,22 +18,25 @@ public class Account implements Serializable{
 	private Integer id;
 	private BigDecimal balance;
 
+	public Account(Account account, BigDecimal newBalance) {
+		this(account);
+		this.balance = newBalance;
+	}
+
 	public Account(Account account) {
 		this(account.id, account.balance);
 	}
 
 	public Account deposity(BigDecimal amount) {
-		if(amount != null) {
-			this.balance = this.balance.add(amount);
-		}
-		return this;
+		return AccountDeposityStrategy
+				.getInstance()
+				.execute(this, amount);
 	}
 
 	public Account withdraw(BigDecimal amount) {
-		if(amount != null) {
-			this.balance = this.balance.subtract(amount);
-		}
-		return this;
+		return AccountWithdrawStrategy
+				.getInstance()
+				.execute(this, amount);
 	}
 	
 	@Override
