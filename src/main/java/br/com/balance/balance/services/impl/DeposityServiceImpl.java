@@ -24,7 +24,7 @@ public class DeposityServiceImpl implements DeposityService {
 	public Account deposit(Integer accountId, BigDecimal amount) {
 		var account = this.repository.findByAccountId(accountId);
 		if(account == null) {
-			log.info("Create new account with id %s; initial amount %s", amount);
+			log.info(String.format("Create new account with id %s; initial balance %s", accountId, amount));
 			return this.accountService.createNewAccount(new Account(accountId, amount));
 		}
 		return this.repository.update(account.deposity(amount));

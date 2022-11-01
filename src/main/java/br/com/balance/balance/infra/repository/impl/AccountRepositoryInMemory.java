@@ -19,8 +19,8 @@ public final class AccountRepositoryInMemory implements AccountRepository{
 	@Override
 	public void reset() {
 		synchronized (cache) {
-			log.info("Reset database");
 			cache.clear();
+			log.info("Database reset");
 		}
 	}
 	
@@ -36,7 +36,7 @@ public final class AccountRepositoryInMemory implements AccountRepository{
 	@Override
 	public Account store(Account newAccount) {
 		synchronized (cache) {
-			log.info("Store new account %s", newAccount);
+			log.info(String.format("Store new account %s", newAccount));
 			cache.put(newAccount.getId(), new Account(newAccount));
 			return newAccount;
 		}
@@ -45,7 +45,7 @@ public final class AccountRepositoryInMemory implements AccountRepository{
 	@Override
 	public Account update(Account account) {
 		synchronized (cache) {
-			log.info("Update account %s", account);
+			log.info(String.format("Update account %s", account));
 			cache.put(account.getId(), new Account(account) );
 			return account;
 		}

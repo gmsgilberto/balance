@@ -10,21 +10,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
 
-import br.com.balance.balance.controllers.AccountEventController;
+import br.com.balance.balance.controllers.AccountEventHub;
 import br.com.balance.balance.controllers.BalanceController;
-import br.com.balance.balance.controllers.DataBaseAdminController;
+import br.com.balance.balance.controllers.AdminController;
 import br.com.balance.balance.controllers.dtos.AccountEventRequest;
 import lombok.extern.slf4j.Slf4j;
 
 @SpringBootTest
 @Slf4j
-class BalanceApplicationTests {
+class ApplicationTest {
 
 	@Autowired
-	private DataBaseAdminController adminController;
+	private AdminController adminController;
 	
 	@Autowired
-	private AccountEventController accountEventController;
+	private AccountEventHub accountEventController;
 	
 	@Autowired
 	private BalanceController balanceController;

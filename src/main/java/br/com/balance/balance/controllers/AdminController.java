@@ -9,7 +9,7 @@ import lombok.AllArgsConstructor;
 
 @RestController
 @AllArgsConstructor
-public class DataBaseAdminController {
+public class AdminController {
 	
 	private AccountRepository accountRepository;
 	

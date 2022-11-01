@@ -35,6 +35,10 @@ public class Account implements Serializable{
 		}
 		return this;
 	}
-
+	
+	@Override
+	public String toString() {
+		return String.format("AccountId: %s, Balance: %s", this.id, this.balance);
+	}
 	
 }

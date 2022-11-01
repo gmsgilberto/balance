@@ -3,6 +3,7 @@ package br.com.balance.balance.services.impl;
 import java.math.BigDecimal;
 
 import br.com.balance.balance.domain.dtos.TransferResult;
+import br.com.balance.balance.exceptions.AccountNotfoundException;
 import br.com.balance.balance.infra.repository.AccountRepository;
 import br.com.balance.balance.services.DeposityService;
 import br.com.balance.balance.services.TransferService;
@@ -22,13 +23,13 @@ public class TransferServiceImpl implements TransferService {
 	@Override
 	public TransferResult transfer(Integer from, Integer to, BigDecimal amount) {
 		var origin = this.accountRepository.findByAccountId(from);
-		
-		if(origin != null) {
-			origin = this.withdrawService.withdraw(from, amount);
-			var destination = this.deposityService.deposit(to, amount);
-			return new TransferResult(origin, destination);
+		if(origin == null) {
+			throw new AccountNotfoundException(from);
 		}
-		return null;
+		
+		origin = this.withdrawService.withdraw(from, amount);
+		var destination = this.deposityService.deposit(to, amount);
+		return new TransferResult(origin, destination);
 	}
 	
 }

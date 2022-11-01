@@ -3,6 +3,7 @@ package br.com.balance.balance.services.impl;
 import java.math.BigDecimal;
 
 import br.com.balance.balance.domain.Account;
+import br.com.balance.balance.exceptions.AccountNotfoundException;
 import br.com.balance.balance.infra.repository.AccountRepository;
 import br.com.balance.balance.services.WithdrawService;
 import lombok.AllArgsConstructor;
@@ -19,7 +20,7 @@ public class WithdrawServiceImpl implements WithdrawService {
 	public Account withdraw(Integer accountId, BigDecimal amount) {
 		var account = this.repository.findByAccountId(accountId);
 		if(account == null) {
-			return null;
+			throw new AccountNotfoundException(accountId);
 		}
 		return this.repository.update(account.withdraw(amount));
 	}
