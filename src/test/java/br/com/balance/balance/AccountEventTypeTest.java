@@ -7,8 +7,8 @@ import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 
-import br.com.balance.balance.domain.AccountEventType;
-import br.com.balance.balance.exceptions.EventNotFoundException;
+import br.com.balance.balance.accounts.AccountEventType;
+import br.com.balance.balance.accounts.exceptions.EventNotFoundException;
 
 
 class AccountEventTypeTest {

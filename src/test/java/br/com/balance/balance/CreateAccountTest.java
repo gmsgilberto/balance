@@ -10,9 +10,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import br.com.balance.balance.domain.Account;
-import br.com.balance.balance.exceptions.DuplicateAccountException;
-import br.com.balance.balance.services.AccountService;
+import br.com.balance.balance.accounts.Account;
+import br.com.balance.balance.accounts.exceptions.DuplicateAccountException;
+import br.com.balance.balance.accounts.services.AccountService;
 
 
 @SpringBootTest
